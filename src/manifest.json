@@ -1,0 +1,12 @@
+{
+	"manifest_version": 1,
+	"id": "com.joplin_plugin.nlr",
+	"app_min_version": "1.7",
+	"version": "1.0.0",
+	"name": "NLR",
+	"description": "a net literature read plugin for joplin",
+	"author": "fengQ",
+	"homepage_url": "",
+	"repository_url": "https://github.com/fengqiaozhu/joplin_plugin_nlr.git",
+	"keywords": []
+}
