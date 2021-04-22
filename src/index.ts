@@ -8,6 +8,7 @@ const addPanel = async function () {
     await joplin.views.panels.addScript(panel, './lib/element.css')
     await joplin.views.panels.addScript(panel, './lib/element.js')
     await joplin.views.panels.addScript(panel, './webview.js')
+    await joplin.views.panels.addScript(panel, './webview.css')
     return panel
 }
 

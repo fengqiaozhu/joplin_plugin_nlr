@@ -1,0 +1,35 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+html > div, body > div {
+  height: 100%;
+}
+html > div #joplin-plugin-content, body > div #joplin-plugin-content {
+  height: 100%;
+}
+html > div #joplin-plugin-content #app, body > div #joplin-plugin-content #app {
+  height: 100%;
+  box-shadow: inset 7px 0px 7px -7px #5E5E5E;
+  padding: 8px 6px;
+}
+html > div #joplin-plugin-content #app .header, body > div #joplin-plugin-content #app .header {
+  display: flex;
+  justify-content: end;
+}
+html > div #joplin-plugin-content #app .header .title, body > div #joplin-plugin-content #app .header .title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+html > div #joplin-plugin-content #app .search-area, body > div #joplin-plugin-content #app .search-area {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+html > div #joplin-plugin-content #app .search-area .el-input, body > div #joplin-plugin-content #app .search-area .el-input {
+  width: 300px;
+}
+
+/*# sourceMappingURL=webview.css.map */
