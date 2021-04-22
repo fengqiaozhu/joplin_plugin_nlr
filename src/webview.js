@@ -23,19 +23,27 @@ class WebviewRunner {
             console.log(loaded.join(',') + ' loaded succeed!')
             const App = {
                 data() {
-                    return {};
+                    return {
+                        searchingBookName: '',
+                        searchResult:[],
+                        selectedBook:{},
+                        chapters:[],
+                        chaptersToDownload:[]
+                    };
                 },
                 methods: {
                     handleRetractClick() {
-                        console.log('aaaaaaaaa')
                         webviewApi.postMessage({
                             name: 'hideNlrPanel'
                         });
+                    },
+                    handleSearchBookClick(){
+                        console.log(this.searchingBookName)
                     }
                 }
             };
             const app = Vue.createApp(App);
-            app.use(ElementPlus);
+            app.use(ElementPlus,{ size: 'mini'});
             app.mount("#app");
         })
     }
