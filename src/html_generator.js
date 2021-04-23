@@ -16,6 +16,11 @@ const webviewHtml = () => {
             </template>
           </el-input>
       </div>
+      <div class="search-result">
+          <div class="book-list" v-if="!selectedBook"></div>
+          <div class="chapters-list" v-if="!!selectedBook"></div>
+          <div class="download-opt" v-if="!!chapters.length"></div>
+      </div>
     </div>
     `
 }

@@ -26,7 +26,7 @@ class WebviewRunner {
                     return {
                         searchingBookName: '',
                         searchResult:[],
-                        selectedBook:{},
+                        selectedBook:'',
                         chapters:[],
                         chaptersToDownload:[]
                     };
