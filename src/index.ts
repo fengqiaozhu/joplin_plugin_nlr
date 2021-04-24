@@ -1,8 +1,11 @@
 import joplin from 'api';
 import webviewHtml from "./html_generator";
+import ebook from 'ebook-getter'
+const utf8 = require('utf8')
 
 const addPanel = async function () {
     const panel = await joplin.views.panels.create('nlr-panel');
+    console.log(utf8.encode(webviewHtml()) )
     await joplin.views.panels.setHtml(panel, webviewHtml());
     await joplin.views.panels.addScript(panel, './lib/vue.js')
     await joplin.views.panels.addScript(panel, './lib/element.css')
@@ -29,6 +32,14 @@ joplin.plugins.register({
                                 console.log('==========hideNlrPanel=============')
                                 await joplin.views.panels.hide(nlrPanel)
                                 break
+                            case 'searchBook':
+                                console.log('==========searchBook=============')
+                                let bookName = message.bookName
+                                return await ebook.houzi.search(bookName)
+                            case 'getBookInfo':
+                                console.log('==========getBookInfo=============')
+                                let bookID = message.bookID
+                                return await ebook.houzi.catalog(bookID)
                         }
                     })
                 } else {

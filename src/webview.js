@@ -25,10 +25,15 @@ class WebviewRunner {
                 data() {
                     return {
                         searchingBookName: '',
-                        searchResult:[],
-                        selectedBook:'',
-                        chapters:[],
-                        chaptersToDownload:[]
+                        searchResult: [],
+                        selectedBook: '',
+                        chapters: [],
+                        chaptersToDownload: [],
+                        bookInfoFields: [
+                            {field: 'Author', label: '作者'},
+                            {field: 'BookStatus', label: '状态'},
+                            {field: 'Desc', label: '描述'}
+                        ]
                     };
                 },
                 methods: {
@@ -37,13 +42,31 @@ class WebviewRunner {
                             name: 'hideNlrPanel'
                         });
                     },
-                    handleSearchBookClick(){
-                        console.log(this.searchingBookName)
+                    handleSearchBookClick() {
+                        if (this.searchingBookName) {
+                            webviewApi.postMessage({
+                                name: 'searchBook',
+                                bookName: this.searchingBookName
+                            }).then(dt => {
+                                if (dt.status === 1 && dt.info === 'success') {
+                                    this.searchResult = dt.data
+                                }
+                            })
+                        }
+                    },
+                    handleGetMoreBookInfoClick(bookID) {
+                        // this.selectedBook = bookID
+                        webviewApi.postMessage({
+                            name: 'getBookInfo',
+                            bookID: bookID
+                        }).then(info => {
+                            console.log(info)
+                        })
                     }
                 }
             };
             const app = Vue.createApp(App);
-            app.use(ElementPlus,{ size: 'mini'});
+            app.use(ElementPlus, {size: 'mini'});
             app.mount("#app");
         })
     }

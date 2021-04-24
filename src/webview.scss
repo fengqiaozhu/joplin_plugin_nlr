@@ -9,6 +9,8 @@ html,body{
         height: 100%;
         box-shadow: inset  7px 0px 7px -7px #5E5E5E;
         padding: 8px 6px;
+        display: flex;
+        flex-direction: column;
         .header{
           display: flex;
           justify-content: end;
@@ -25,6 +27,46 @@ html,body{
           justify-content: center;
           .el-input{
             width: 300px;
+          }
+        }
+        .search-result{
+          flex: 1;
+          overflow-y: scroll;
+          margin-top: 8px;
+          .book-list{
+            .box-card{
+              margin-bottom: 6px;
+              .el-card__header{
+                padding: 8px 16px;
+              }
+              .card-header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .book-name{
+                  font-size: 20px;
+                  font-weight: 800;
+                }
+              }
+              .book-info{
+                height: 80px;
+                display: flex;
+                .cover{
+                  width: 60px;
+                  img{
+                    height: 100%;
+                  }
+                }
+                .other-info{
+                  flex: 1;
+                  padding-left: 8px;
+                  overflow-y: hidden;
+                  .item-title{
+                    font-weight: 800;
+                  }
+                }
+              }
+            }
           }
         }
       }

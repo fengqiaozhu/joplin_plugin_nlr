@@ -12,6 +12,8 @@ html > div #joplin-plugin-content #app, body > div #joplin-plugin-content #app {
   height: 100%;
   box-shadow: inset 7px 0px 7px -7px #5E5E5E;
   padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
 }
 html > div #joplin-plugin-content #app .header, body > div #joplin-plugin-content #app .header {
   display: flex;
@@ -30,6 +32,44 @@ html > div #joplin-plugin-content #app .search-area, body > div #joplin-plugin-c
 }
 html > div #joplin-plugin-content #app .search-area .el-input, body > div #joplin-plugin-content #app .search-area .el-input {
   width: 300px;
+}
+html > div #joplin-plugin-content #app .search-result, body > div #joplin-plugin-content #app .search-result {
+  flex: 1;
+  overflow-y: scroll;
+  margin-top: 8px;
+}
+html > div #joplin-plugin-content #app .search-result .book-list .box-card, body > div #joplin-plugin-content #app .search-result .book-list .box-card {
+  margin-bottom: 6px;
+}
+html > div #joplin-plugin-content #app .search-result .book-list .box-card .el-card__header, body > div #joplin-plugin-content #app .search-result .book-list .box-card .el-card__header {
+  padding: 8px 16px;
+}
+html > div #joplin-plugin-content #app .search-result .book-list .box-card .card-header, body > div #joplin-plugin-content #app .search-result .book-list .box-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+html > div #joplin-plugin-content #app .search-result .book-list .box-card .card-header .book-name, body > div #joplin-plugin-content #app .search-result .book-list .box-card .card-header .book-name {
+  font-size: 20px;
+  font-weight: 800;
+}
+html > div #joplin-plugin-content #app .search-result .book-list .box-card .book-info, body > div #joplin-plugin-content #app .search-result .book-list .box-card .book-info {
+  height: 80px;
+  display: flex;
+}
+html > div #joplin-plugin-content #app .search-result .book-list .box-card .book-info .cover, body > div #joplin-plugin-content #app .search-result .book-list .box-card .book-info .cover {
+  width: 60px;
+}
+html > div #joplin-plugin-content #app .search-result .book-list .box-card .book-info .cover img, body > div #joplin-plugin-content #app .search-result .book-list .box-card .book-info .cover img {
+  height: 100%;
+}
+html > div #joplin-plugin-content #app .search-result .book-list .box-card .book-info .other-info, body > div #joplin-plugin-content #app .search-result .book-list .box-card .book-info .other-info {
+  flex: 1;
+  padding-left: 8px;
+  overflow-y: hidden;
+}
+html > div #joplin-plugin-content #app .search-result .book-list .box-card .book-info .other-info .item-title, body > div #joplin-plugin-content #app .search-result .book-list .box-card .book-info .other-info .item-title {
+  font-weight: 800;
 }
 
 /*# sourceMappingURL=webview.css.map */
