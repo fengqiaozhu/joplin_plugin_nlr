@@ -25,6 +25,6 @@
     "yargs": "^16.2.0"
   },
   "dependencies": {
-    "ebook-getter": "^1.0.2"
+    "ebook-getter": "^1.0.3"
   }
 }
