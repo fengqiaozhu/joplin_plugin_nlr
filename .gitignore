@@ -2,3 +2,4 @@ dist/
 node_modules/
 publish/
 .idea
+/src/.sass-cache/

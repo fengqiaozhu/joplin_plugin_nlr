@@ -57,5 +57,5 @@ export default class JoplinCommands {
      * });
      * ```
      */
-    register(command: { iconName: string; name: string; label: string; execute: () => void }): Promise<void>;
+	register(command: Command): Promise<void>;
 }

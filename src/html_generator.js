@@ -35,8 +35,32 @@ const webviewHtml = () => {
                 </div>
             </el-card>
           </div>
-          <div class="chapters-list" v-if="!!selectedBook"></div>
-          <div class="download-opt" v-if="!!chapters.length"></div>
+          <div class="chapters-list" v-if="!!selectedBook">
+            <div class="list-header">
+              <el-button class="button" type="text" @click="handleBackToBookListClick()">BACK</el-button>
+              <div class="chapters-title">
+                <span>{{selectedBookInfo['Name']}}</span>
+              </div>
+            </div>
+            <div class="list">
+                <div class="card-layout">
+                    <el-card class="chapters-card" v-for="clog in catalogs" :key="clog.name+clog.list.length">
+                      <template #header>
+                        <div class="card-header">
+                          <span>{{clog.name+' ('+ clog.list.length +')'}}</span>
+                          <el-checkbox :true-label="1" :false-label="0" v-model="clog.selected"></el-checkbox>
+                        </div>
+                      </template>
+                      <div v-for="c in chapterRenderData(clog.list)" :key="c.id" class="text item">
+                        {{c.name}}
+                      </div>
+                    </el-card>
+                </div>
+            </div>
+          </div>
+          <div class="download-opt" v-if="!!selectedBook&&!!catalogs.length">
+            <el-button type="success" @click="handleDownloadClick">Download</el-button>
+          </div>
       </div>
     </div>
     `

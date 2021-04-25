@@ -27,7 +27,7 @@ class WebviewRunner {
                         searchingBookName: '',
                         searchResult: [],
                         selectedBook: '',
-                        chapters: [],
+                        catalogs: [],
                         chaptersToDownload: [],
                         bookInfoFields: [
                             {field: 'Author', label: '作者'},
@@ -35,6 +35,18 @@ class WebviewRunner {
                             {field: 'Desc', label: '描述'}
                         ]
                     };
+                },
+                computed: {
+                    selectedBookInfo() {
+                        return this.searchResult.filter(item => item['Id'] === this.selectedBook)[0]
+                    },
+                    selectedCatalog() {
+                        let catalogs = []
+                        this.catalogs.filter(c => !!c.selected).forEach(item => {
+                            catalogs = catalogs.concat(item['list'])
+                        })
+                        return catalogs
+                    }
                 },
                 methods: {
                     handleRetractClick() {
@@ -55,14 +67,50 @@ class WebviewRunner {
                         }
                     },
                     handleGetMoreBookInfoClick(bookID) {
-                        // this.selectedBook = bookID
+                        this.selectedBook = bookID
                         webviewApi.postMessage({
                             name: 'getBookInfo',
                             bookID: bookID
                         }).then(info => {
-                            console.log(info)
+                            if (info.status === 1 && info.info === 'success') {
+                                this.catalogs = info.data.list
+                            }
+                        })
+                    },
+                    handleBackToBookListClick() {
+                        this.catalogs = []
+                        this.selectedBook = ''
+                    },
+                    handleDownloadClick() {
+                        webviewApi.postMessage({
+                            name: 'downloadBook',
+                            book: JSON.stringify({
+                                info: this.selectedBookInfo,
+                                chapters: this.selectedCatalog
+                            })
+                        })
+                    },
+                    chapterRenderData(chapters) {
+                        let dt = JSON.parse(JSON.stringify(chapters))
+                        if (chapters.length > 5) {
+                            dt.splice(3, chapters.length - 4, {name: '...', type: 'more'})
+                        }
+                        return dt
+                    },
+                    getDownloadList() {
+                        webviewApi.postMessage({
+                            name: 'getDownloadList'
+                        }).then(dt => {
+                            console.log(dt)
                         })
                     }
+                },
+                mounted() {
+                    let self = this
+                    self.getDownloadList()
+                    setInterval(() => {
+                        self.getDownloadList()
+                    }, 2000)
                 }
             };
             const app = Vue.createApp(App);
