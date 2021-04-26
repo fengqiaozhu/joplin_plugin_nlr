@@ -33,7 +33,10 @@ class WebviewRunner {
                             {field: 'Author', label: '作者'},
                             {field: 'BookStatus', label: '状态'},
                             {field: 'Desc', label: '描述'}
-                        ]
+                        ],
+                        downloadStatus: 0,
+                        sourceLoaded: false,
+                        loadingResult: false
                     };
                 },
                 computed: {
@@ -43,7 +46,10 @@ class WebviewRunner {
                     selectedCatalog() {
                         let catalogs = []
                         this.catalogs.filter(c => !!c.selected).forEach(item => {
-                            catalogs = catalogs.concat(item['list'])
+                            catalogs = catalogs.concat(item['list'].map(p => {
+                                p.catalog = item.name
+                                return p
+                            }))
                         })
                         return catalogs
                     }
@@ -55,26 +61,37 @@ class WebviewRunner {
                         });
                     },
                     handleSearchBookClick() {
+                        let self = this
                         if (this.searchingBookName) {
+                            self.loadingResult = true
                             webviewApi.postMessage({
                                 name: 'searchBook',
-                                bookName: this.searchingBookName
+                                bookName: self.searchingBookName
                             }).then(dt => {
+                                self.loadingResult = false
                                 if (dt.status === 1 && dt.info === 'success') {
-                                    this.searchResult = dt.data
+                                    self.searchResult = dt.data
                                 }
                             })
                         }
                     },
                     handleGetMoreBookInfoClick(bookID) {
-                        this.selectedBook = bookID
+                        let self = this
+                        self.selectedBook = bookID
+                        self.loadingResult = true
                         webviewApi.postMessage({
                             name: 'getBookInfo',
                             bookID: bookID
                         }).then(info => {
                             if (info.status === 1 && info.info === 'success') {
-                                this.catalogs = info.data.list
+                                self.catalogs = info.data.list.map(item => {
+                                    item.selected = 1
+                                    return item
+                                })
                             }
+                            self.$nextTick(() => {
+                                self.loadingResult = false
+                            })
                         })
                     },
                     handleBackToBookListClick() {
@@ -88,6 +105,8 @@ class WebviewRunner {
                                 info: this.selectedBookInfo,
                                 chapters: this.selectedCatalog
                             })
+                        }).then(() => {
+                            this.downloadStatus = 1
                         })
                     },
                     chapterRenderData(chapters) {
@@ -102,11 +121,15 @@ class WebviewRunner {
                             name: 'getDownloadList'
                         }).then(dt => {
                             console.log(dt)
+                            if (!dt) {
+                                this.downloadStatus = 0
+                            }
                         })
                     }
                 },
                 mounted() {
                     let self = this
+                    self.sourceLoaded = true
                     self.getDownloadList()
                     setInterval(() => {
                         self.getDownloadList()
@@ -115,6 +138,7 @@ class WebviewRunner {
             };
             const app = Vue.createApp(App);
             app.use(ElementPlus, {size: 'mini'});
+            document.getElementsByClassName('app-container')[0].setAttribute("style", "display: flex");
             app.mount("#app");
         })
     }

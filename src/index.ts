@@ -11,13 +11,13 @@ let ebookFolderID = ''
 
 const addPanel = async function () {
     const panel = await joplin.views.panels.create('nlr-panel');
-    await joplin.views.panels.setHtml(panel, webviewHtml());
+    await joplin.views.panels.addScript(panel, './webview.css')
     await joplin.views.panels.addScript(panel, './lib/vue.js')
     await joplin.views.panels.addScript(panel, './lib/font-awesome/css/font-awesome.css')
     await joplin.views.panels.addScript(panel, './lib/element.css')
     await joplin.views.panels.addScript(panel, './lib/element.js')
+    await joplin.views.panels.setHtml(panel, webviewHtml());
     await joplin.views.panels.addScript(panel, './webview.js')
-    await joplin.views.panels.addScript(panel, './webview.css')
     return panel
 }
 
@@ -63,19 +63,23 @@ const downloadBook = () => {
             let list = downloadList['chapters']
             let paused = downloadList['paused']
             if (!paused) {
-                let chapterID = list.shift()['id']
+                let cpt = list.shift()
+                let chapterID = cpt['id']
+                let catalog = cpt['catalog']
                 ebook.houzi.chapter(bookID * 1, chapterID * 1)
                     .then(async dt => {
-                        console.log(dt)
-                        if (list.length) {
-                            await setDownloadList(downloadList)
-                            await saveToNote(dt)
-                            setTimeout(() => {
-                                downloadBook()
-                            }, requestTimeDelay)
-                        } else {
-                            await delDownloadList()
-                            return
+                        if (dt['info'] === "success" && dt['status'] === 1) {
+                            dt['data']['catalog'] = catalog
+                            if (list.length) {
+                                await setDownloadList(downloadList)
+                                await saveToNote(dt)
+                                setTimeout(() => {
+                                    downloadBook()
+                                }, requestTimeDelay)
+                            } else {
+                                await delDownloadList()
+                                return
+                            }
                         }
                     })
                     .catch(e => {
@@ -89,14 +93,14 @@ const downloadBook = () => {
 }
 
 const saveToNote = async (dt) => {
-    if (dt['info'] === "success" && dt['status'] === 1) {
-        let chapter = dt.data
-        let content = chapter['content']
-        let title = chapter['cname']
-        let bookName = chapter['name']
-        let folderID = await createFolder(ebookFolderID, bookName)
-        await joplin.data.post(['notes'], null, {parent_id: folderID, title: title, body: content});
-    }
+    let chapter = dt.data
+    let content = chapter['content']
+    let title = chapter['cname']
+    let bookName = chapter['name']
+    let catalog = chapter['catalog']
+    let bookFolderID = await createFolder(ebookFolderID, bookName)
+    let catalogFolderID = await createFolder(bookFolderID, catalog)
+    await joplin.data.post(['notes'], null, {parent_id: catalogFolderID, title: title, body: content});
 }
 
 const createFolder = async (parentID: string, folderName: string) => {
@@ -104,10 +108,8 @@ const createFolder = async (parentID: string, folderName: string) => {
     folders = parentID ? folders['items'].filter(item => item['parent_id'] === parentID) : folders['items']
     let addingFolder = folders.filter(item => item.title === folderName)
     if (!addingFolder.length) {
-        await joplin.data.post(['folders'], null, {parent_id: parentID, title: folderName})
-            .then(added => {
-                return added['id']
-            })
+        let added = await joplin.data.post(['folders'], null, {parent_id: parentID, title: folderName})
+        return added['id']
     } else {
         return addingFolder[0]['id']
     }
@@ -147,7 +149,6 @@ joplin.plugins.register({
                             case 'getDownloadList':
                                 return await getDownloadList()
                             case 'pauseDownload':
-
                                 break
                         }
                     })
