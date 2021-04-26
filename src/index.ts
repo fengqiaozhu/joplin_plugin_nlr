@@ -13,6 +13,7 @@ const addPanel = async function () {
     const panel = await joplin.views.panels.create('nlr-panel');
     await joplin.views.panels.setHtml(panel, webviewHtml());
     await joplin.views.panels.addScript(panel, './lib/vue.js')
+    await joplin.views.panels.addScript(panel, './lib/font-awesome/css/font-awesome.css')
     await joplin.views.panels.addScript(panel, './lib/element.css')
     await joplin.views.panels.addScript(panel, './lib/element.js')
     await joplin.views.panels.addScript(panel, './webview.js')
@@ -98,10 +99,9 @@ const saveToNote = async (dt) => {
     }
 }
 
-const createFolder = async (parentID, folderName) => {
+const createFolder = async (parentID: string, folderName: string) => {
     let folders = await joplin.data.get(['folders'])
     folders = parentID ? folders['items'].filter(item => item['parent_id'] === parentID) : folders['items']
-    console.log(folders)
     let addingFolder = folders.filter(item => item.title === folderName)
     if (!addingFolder.length) {
         await joplin.data.post(['folders'], null, {parent_id: parentID, title: folderName})
@@ -116,7 +116,7 @@ const createFolder = async (parentID, folderName) => {
 joplin.plugins.register({
     onStart: async function () {
         let nlrPanel = null
-        ebookFolderID = await createFolder(null, 'Ebooks')
+        ebookFolderID = await createFolder('', 'Ebooks')
         await joplin.commands.register({
             name: 'nlrToggle',
             label: 'NLR',

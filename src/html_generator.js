@@ -3,9 +3,9 @@ const webviewHtml = () => {
     <div id="app">
       <div class="header">
          <div class="title"><span>NLR</span></div>
-         <el-button type="primary" size="mini" @click="handleRetractClick">retract</el-button>
+         <el-button type="warning" size="mini" @click="handleRetractClick"><span>HIDE</span>&nbsp;<i class="fa fa-sign-out"></i></el-button>
       </div>
-      <div class="search-area">
+      <div class="search-area" v-if="!selectedBook">
           <el-input
             placeholder="Please input the book name"
             v-model="searchingBookName"
@@ -37,10 +37,11 @@ const webviewHtml = () => {
           </div>
           <div class="chapters-list" v-if="!!selectedBook">
             <div class="list-header">
-              <el-button class="button" type="text" @click="handleBackToBookListClick()">BACK</el-button>
+              <el-button class="button" type="text" @click="handleBackToBookListClick()"><i class="fa fa-chevron-left"></i>&nbsp;<span>BACK</span></el-button>
               <div class="chapters-title">
                 <span>{{selectedBookInfo['Name']}}</span>
               </div>
+              <el-button :disabled="!selectedCatalog.length" type="primary" @click="handleDownloadClick"><i class="fa fa-download"></i>&nbsp;<span>DOWNLOAD</span></el-button>
             </div>
             <div class="list">
                 <div class="card-layout">
@@ -57,9 +58,6 @@ const webviewHtml = () => {
                     </el-card>
                 </div>
             </div>
-          </div>
-          <div class="download-opt" v-if="!!selectedBook&&!!catalogs.length">
-            <el-button type="success" @click="handleDownloadClick">Download</el-button>
           </div>
       </div>
     </div>
