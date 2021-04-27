@@ -13,7 +13,7 @@ html, body {
 
       #app {
         height: 100%;
-        box-shadow: inset 7px 0px 7px -7px #5E5E5E;
+        box-shadow: inset 7px 0 7px -7px #5E5E5E;
 
         display: flex;
         flex-direction: column;
@@ -156,11 +156,11 @@ html, body {
     }
   }
 
-  /deep/ .el-scrollbar__thumb {
+  .el-scrollbar__thumb {
     background-color: var(--joplin-color3)
   }
 
-  /deep/ .el-card {
+  .el-card {
     border-color: var(--joplin-divider-color);
 
     .el-card__header {
