@@ -36,7 +36,7 @@ class WebviewRunner {
                         ],
                         downloadStatus: 0,
                         sourceLoaded: false,
-                        loadingResult: false
+                        loadingResult: false,
                     };
                 },
                 computed: {
@@ -109,6 +109,14 @@ class WebviewRunner {
                             this.downloadStatus = 1
                         })
                     },
+                    handleOpenGithubLinkClick() {
+                        webviewApi.postMessage({
+                            name: 'openUrlInBrowser',
+                            url: "https://github.com/fengqiaozhu/joplin_plugin_nlr"
+                        }).then(() => {
+                            this.downloadStatus = 1
+                        })
+                    },
                     chapterRenderData(chapters) {
                         let dt = JSON.parse(JSON.stringify(chapters))
                         if (chapters.length > 5) {
@@ -125,15 +133,30 @@ class WebviewRunner {
                                 this.downloadStatus = 0
                             }
                         })
+                    },
+                    throttle(func, delay) {
+                        let timer = null;
+                        return function () {
+                            let context = this;
+                            let args = arguments;
+                            if (!timer) {
+                                timer = setTimeout(function () {
+                                    func.apply(context, args);
+                                    timer = null;
+                                }, delay);
+                            }
+                        }
                     }
                 },
                 mounted() {
                     let self = this
                     self.sourceLoaded = true
-                    self.getDownloadList()
-                    setInterval(() => {
+                    self.$nextTick(() => {
                         self.getDownloadList()
-                    }, 2000)
+                        setInterval(() => {
+                            self.getDownloadList()
+                        }, 2000)
+                    })
                 }
             };
             const app = Vue.createApp(App);

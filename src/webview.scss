@@ -1,6 +1,9 @@
 html, body {
   width: 100%;
   height: 100%;
+  font-family: var(--joplin-font-family);
+  color: var(--joplin-color);
+  background: var(--joplin-background);
 
   > div {
     height: 100%;
@@ -11,15 +14,26 @@ html, body {
       #app {
         height: 100%;
         box-shadow: inset 7px 0px 7px -7px #5E5E5E;
-        padding: 8px 6px;
+
         display: flex;
         flex-direction: column;
 
         .app-container {
+          padding: 8px 8px;
           flex: 1;
           height: 0;
           display: none;
           flex-direction: column;
+          position: relative;
+
+          .github-icon {
+            position: absolute;
+            overflow: hidden;
+            left: 0;
+            top: -2px;
+            transform: rotate(-90deg);
+            cursor: pointer;
+          }
 
           .header {
             display: flex;
@@ -48,6 +62,7 @@ html, body {
             justify-content: space-between;
             align-items: center;
             margin-top: 8px;
+
             .chapters-title {
               flex: 1;
               text-align: center;
@@ -64,6 +79,8 @@ html, body {
             flex-direction: column;
 
             .book-list {
+              padding-bottom: 30px;
+
               .box-card {
                 margin-bottom: 6px;
 
@@ -108,46 +125,52 @@ html, body {
             }
 
             .chapters-list {
-              flex: 1;
-              display: flex;
-              flex-direction: column;
-              height: 0;
+              padding-top: 6px;
+              padding-bottom: 30px;
 
-              .list {
-                margin-top: 6px;
-                flex: 1;
-                height: 0;
+              .card-layout {
+                height: 100%;
+                overflow-y: auto;
 
-                .card-layout {
-                  height: 100%;
-                  overflow-y: auto;
+                .el-card {
+                  margin-bottom: 8px;
 
-                  .el-card {
-                    margin-bottom: 8px;
+                  .el-card__header {
+                    padding: 8px 16px;
 
-                    .el-card__header {
-                      padding: 8px 16px;
-
-                      .card-header {
-                        font-size: 16px;
-                        font-weight: 800;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                      }
+                    .card-header {
+                      font-size: 16px;
+                      font-weight: 800;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
                     }
-
                   }
+
                 }
               }
-            }
-
-            .download-opt {
-
             }
           }
         }
       }
+    }
+  }
+
+  /deep/ .el-scrollbar__thumb {
+    background-color: var(--joplin-color3)
+  }
+
+  /deep/ .el-card {
+    border-color: var(--joplin-divider-color);
+
+    .el-card__header {
+      background: var(--joplin-background-color3);
+      color: var(--joplin-color);
+      border-color: var(--joplin-divider-color);;
+    }
+
+    .is-always-shadow, .is-hover-shadow:focus, .is-hover-shadow:hover {
+      box-shadow: 0 2px 12px 0 var(--joplin-background-color-transparent)
     }
   }
 }

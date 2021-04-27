@@ -1,123 +1,113 @@
 html, body {
   width: 100%;
   height: 100%;
-}
-html > div, body > div {
-  height: 100%;
-}
-html > div #joplin-plugin-content, body > div #joplin-plugin-content {
-  height: 100%;
-}
-html > div #joplin-plugin-content #app, body > div #joplin-plugin-content #app {
-  height: 100%;
-  box-shadow: inset 7px 0px 7px -7px #5E5E5E;
-  padding: 8px 6px;
-  display: flex;
-  flex-direction: column;
-}
-html > div #joplin-plugin-content #app .app-container, body > div #joplin-plugin-content #app .app-container {
-  flex: 1;
-  height: 0;
-  display: none;
-  flex-direction: column;
-}
-html > div #joplin-plugin-content #app .app-container .header, body > div #joplin-plugin-content #app .app-container .header {
-  display: flex;
-  justify-content: end;
-}
-html > div #joplin-plugin-content #app .app-container .header .title, body > div #joplin-plugin-content #app .app-container .header .title {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-html > div #joplin-plugin-content #app .app-container .search-area, body > div #joplin-plugin-content #app .app-container .search-area {
-  margin-top: 32px;
-  display: flex;
-  justify-content: center;
-}
-html > div #joplin-plugin-content #app .app-container .search-area .el-input, body > div #joplin-plugin-content #app .app-container .search-area .el-input {
-  width: 300px;
-}
-html > div #joplin-plugin-content #app .app-container .list-header, body > div #joplin-plugin-content #app .app-container .list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 8px;
-}
-html > div #joplin-plugin-content #app .app-container .list-header .chapters-title, body > div #joplin-plugin-content #app .app-container .list-header .chapters-title {
-  flex: 1;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 800;
-}
-html > div #joplin-plugin-content #app .app-container .search-result, body > div #joplin-plugin-content #app .app-container .search-result {
-  flex: 1;
-  overflow-y: auto;
-  margin-top: 8px;
-  display: flex;
-  flex-direction: column;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card {
-  margin-bottom: 6px;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .el-card__header, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .el-card__header {
-  padding: 8px 16px;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .card-header, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .card-header .book-name, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .card-header .book-name {
-  font-size: 20px;
-  font-weight: 800;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info {
-  height: 80px;
-  display: flex;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .cover, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .cover {
-  width: 60px;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .cover img, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .cover img {
-  height: 100%;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .other-info, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .other-info {
-  flex: 1;
-  padding-left: 8px;
-  overflow-y: hidden;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .other-info .item-title, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .other-info .item-title {
-  font-weight: 800;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .chapters-list, body > div #joplin-plugin-content #app .app-container .search-result .chapters-list {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  height: 0;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .chapters-list .list, body > div #joplin-plugin-content #app .app-container .search-result .chapters-list .list {
-  margin-top: 6px;
-  flex: 1;
-  height: 0;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .chapters-list .list .card-layout, body > div #joplin-plugin-content #app .app-container .search-result .chapters-list .list .card-layout {
-  height: 100%;
-  overflow-y: auto;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .chapters-list .list .card-layout .el-card, body > div #joplin-plugin-content #app .app-container .search-result .chapters-list .list .card-layout .el-card {
-  margin-bottom: 8px;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .chapters-list .list .card-layout .el-card .el-card__header, body > div #joplin-plugin-content #app .app-container .search-result .chapters-list .list .card-layout .el-card .el-card__header {
-  padding: 8px 16px;
-}
-html > div #joplin-plugin-content #app .app-container .search-result .chapters-list .list .card-layout .el-card .el-card__header .card-header, body > div #joplin-plugin-content #app .app-container .search-result .chapters-list .list .card-layout .el-card .el-card__header .card-header {
-  font-size: 16px;
-  font-weight: 800;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  font-family: var(--joplin-font-family);
+  color: var(--joplin-color);
+  background: var(--joplin-background); }
+  html > div, body > div {
+    height: 100%; }
+    html > div #joplin-plugin-content, body > div #joplin-plugin-content {
+      height: 100%; }
+      html > div #joplin-plugin-content #app, body > div #joplin-plugin-content #app {
+        height: 100%;
+        box-shadow: inset 7px 0px 7px -7px #5E5E5E;
+        display: flex;
+        flex-direction: column; }
+        html > div #joplin-plugin-content #app .app-container, body > div #joplin-plugin-content #app .app-container {
+          padding: 8px 8px;
+          flex: 1;
+          height: 0;
+          display: none;
+          flex-direction: column;
+          position: relative; }
+          html > div #joplin-plugin-content #app .app-container .github-icon, body > div #joplin-plugin-content #app .app-container .github-icon {
+            position: absolute;
+            overflow: hidden;
+            left: 0;
+            top: -2px;
+            transform: rotate(-90deg);
+            cursor: pointer; }
+          html > div #joplin-plugin-content #app .app-container .header, body > div #joplin-plugin-content #app .app-container .header {
+            display: flex;
+            justify-content: end; }
+            html > div #joplin-plugin-content #app .app-container .header .title, body > div #joplin-plugin-content #app .app-container .header .title {
+              flex: 1;
+              display: flex;
+              align-items: center;
+              justify-content: center; }
+          html > div #joplin-plugin-content #app .app-container .search-area, body > div #joplin-plugin-content #app .app-container .search-area {
+            margin-top: 32px;
+            display: flex;
+            justify-content: center; }
+            html > div #joplin-plugin-content #app .app-container .search-area .el-input, body > div #joplin-plugin-content #app .app-container .search-area .el-input {
+              width: 300px; }
+          html > div #joplin-plugin-content #app .app-container .list-header, body > div #joplin-plugin-content #app .app-container .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px; }
+            html > div #joplin-plugin-content #app .app-container .list-header .chapters-title, body > div #joplin-plugin-content #app .app-container .list-header .chapters-title {
+              flex: 1;
+              text-align: center;
+              font-size: 20px;
+              font-weight: 800; }
+          html > div #joplin-plugin-content #app .app-container .search-result, body > div #joplin-plugin-content #app .app-container .search-result {
+            flex: 1;
+            overflow-y: auto;
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column; }
+            html > div #joplin-plugin-content #app .app-container .search-result .book-list, body > div #joplin-plugin-content #app .app-container .search-result .book-list {
+              padding-bottom: 30px; }
+              html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card {
+                margin-bottom: 6px; }
+                html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .el-card__header, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .el-card__header {
+                  padding: 8px 16px; }
+                html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .card-header, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .card-header {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center; }
+                  html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .card-header .book-name, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .card-header .book-name {
+                    font-size: 20px;
+                    font-weight: 800; }
+                html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info {
+                  height: 80px;
+                  display: flex; }
+                  html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .cover, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .cover {
+                    width: 60px; }
+                    html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .cover img, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .cover img {
+                      height: 100%; }
+                  html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .other-info, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .other-info {
+                    flex: 1;
+                    padding-left: 8px;
+                    overflow-y: hidden; }
+                    html > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .other-info .item-title, body > div #joplin-plugin-content #app .app-container .search-result .book-list .box-card .book-info .other-info .item-title {
+                      font-weight: 800; }
+            html > div #joplin-plugin-content #app .app-container .search-result .chapters-list, body > div #joplin-plugin-content #app .app-container .search-result .chapters-list {
+              padding-top: 6px;
+              padding-bottom: 30px; }
+              html > div #joplin-plugin-content #app .app-container .search-result .chapters-list .card-layout, body > div #joplin-plugin-content #app .app-container .search-result .chapters-list .card-layout {
+                height: 100%;
+                overflow-y: auto; }
+                html > div #joplin-plugin-content #app .app-container .search-result .chapters-list .card-layout .el-card, body > div #joplin-plugin-content #app .app-container .search-result .chapters-list .card-layout .el-card {
+                  margin-bottom: 8px; }
+                  html > div #joplin-plugin-content #app .app-container .search-result .chapters-list .card-layout .el-card .el-card__header, body > div #joplin-plugin-content #app .app-container .search-result .chapters-list .card-layout .el-card .el-card__header {
+                    padding: 8px 16px; }
+                    html > div #joplin-plugin-content #app .app-container .search-result .chapters-list .card-layout .el-card .el-card__header .card-header, body > div #joplin-plugin-content #app .app-container .search-result .chapters-list .card-layout .el-card .el-card__header .card-header {
+                      font-size: 16px;
+                      font-weight: 800;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center; }
+  html /deep/ .el-scrollbar__thumb, body /deep/ .el-scrollbar__thumb {
+    background-color: var(--joplin-color3); }
+  html /deep/ .el-card, body /deep/ .el-card {
+    border-color: var(--joplin-divider-color); }
+    html /deep/ .el-card .el-card__header, body /deep/ .el-card .el-card__header {
+      background: var(--joplin-background-color3);
+      color: var(--joplin-color);
+      border-color: var(--joplin-divider-color); }
+    html /deep/ .el-card .is-always-shadow, html /deep/ .el-card .is-hover-shadow:focus, html /deep/ .el-card .is-hover-shadow:hover, body /deep/ .el-card .is-always-shadow, body /deep/ .el-card .is-hover-shadow:focus, body /deep/ .el-card .is-hover-shadow:hover {
+      box-shadow: 0 2px 12px 0 var(--joplin-background-color-transparent); }
 
 /*# sourceMappingURL=webview.css.map */

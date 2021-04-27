@@ -2,6 +2,7 @@ import joplin from 'api';
 import webviewHtml from "./html_generator";
 import ebook from 'ebook-getter'
 
+const opener = require('opener')
 const path = require('path')
 const fs = joplin.require('fs-extra')
 const requestTimeDelay = 2000
@@ -148,6 +149,12 @@ joplin.plugins.register({
                                 break
                             case 'getDownloadList':
                                 return await getDownloadList()
+                            case 'openUrlInBrowser':
+                                let url = message.url
+                                if (!/^(http|https|file)/.test(url))
+                                    url = 'https://' + url;
+                                opener(message.url)
+                                break
                             case 'pauseDownload':
                                 break
                         }
