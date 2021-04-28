@@ -1,6 +1,6 @@
 {
   "name": "joplin-plugin-nlr",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "scripts": {
     "dist": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive",
     "prepare": "npm run dist",
@@ -13,6 +13,10 @@
   "browser": {
     "child_process": false,
     "fs": false
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fengqiaozhu/joplin_plugin_nlr.git"
   },
   "devDependencies": {
     "@types/node": "^14.0.14",
